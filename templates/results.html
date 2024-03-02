@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Scan Results</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .vulnerability { margin-bottom: 20px; }
+        .vulnerability h2 { margin: 0 0 5px 0; }
+        .vulnerability p { margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <h1>Scan Results for {{ target_url }}</h1>
+    {% if alerts %}
+        {% for alert in alerts %}
+            <div class="vulnerability">
+                <h2>{{ loop.index }}. {{ alert['alert'] }}</h2>
+                <p><strong>Risk:</strong> {{ alert['risk'] }}</p>
+                <p><strong>URL:</strong> {{ alert['url'] }}</p>
+                <p><strong>Param:</strong> {{ alert['param'] }}</p>
+                <p><strong>Attack:</strong> {{ alert['attack'] }}</p>
+                <p><strong>Evidence:</strong> {{ alert['evidence'] }}</p>
+            </div>
+        {% endfor %}
+    {% else %}
+        <p>No vulnerabilities found.</p>
+    {% endif %}
+</body>
+</html>
